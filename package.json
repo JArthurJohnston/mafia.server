@@ -1,0 +1,11 @@
+{
+  "name": "mafia.server",
+  "version": "1.0.0",
+  "description": "a simple back end for my mafia.io game",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Joe Johnston",
+  "license": "ISC"
+}
