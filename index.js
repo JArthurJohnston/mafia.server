@@ -11,6 +11,25 @@ const state = new GameState()
 
 function newConnection(socket){
     console.log("Connected")
-    socket.on('playerMoved', state.movePlayer)
-    socket.on('playerAdded', state.addPlayer)
+    socket.on('playerMoved', (player) =>{
+        // console.log(`Player ${JSON.stringify(player)} moved`);
+        state.movePlayer(player)
+        // io.sockets.emit('frenemyMoved', state.players)
+    })
+    socket.on('playerAdded', (player) => {
+        // console.log(`Player ${JSON.stringify(player)} added`);
+        
+        state.addPlayer(player)
+        io.sockets.emit('frenemyAdded', player)
+    })
 }
+
+app.get('/players', (request, response) => {
+    response.send(state.players)
+})
+
+setInterval(() => {
+    io.sockets.emit('state_of_the_world', state)
+}, 1000/30);
+
+console.log('Mafia Server is Running');
