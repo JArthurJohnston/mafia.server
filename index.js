@@ -11,17 +11,22 @@ const state = new GameState()
 
 function newConnection(socket){
     console.log("Connected")
+
+    socket.on('playerAdded', (player) => {
+        console.log(`Player ${JSON.stringify(player)} added`);
+        
+        state.addPlayer(player)
+        socket.emit('playerReceived')
+        io.sockets.emit('frenemyAdded', player)
+    })
+
     socket.on('playerMoved', (player) =>{
         // console.log(`Player ${JSON.stringify(player)} moved`);
         state.movePlayer(player)
         // io.sockets.emit('frenemyMoved', state.players)
     })
-    socket.on('playerAdded', (player) => {
-        // console.log(`Player ${JSON.stringify(player)} added`);
-        
-        state.addPlayer(player)
-        io.sockets.emit('frenemyAdded', player)
-    })
+
+    socket.emit('connected')
 }
 
 app.get('/players', (request, response) => {

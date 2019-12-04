@@ -3,7 +3,6 @@ const Player = require('./Player')
 class GameState {
 
     constructor(){
-        this.players = []
         this.playerMap = {}
         this.addPlayer = this.addPlayer.bind(this);
         this.movePlayer = this.movePlayer.bind(this);
@@ -14,13 +13,14 @@ class GameState {
         if(!this.playerMap[name]){
             const newPlayer = new Player(name, x, y)
             this.playerMap[name] = newPlayer
-            this.players.push(newPlayer)
         }
     }
 
     movePlayer({name, x, y}){
-        this.playerMap[name].x = x
-        this.playerMap[name].y = y
+        if(this.playerMap[name]){
+            this.playerMap[name].x = x
+            this.playerMap[name].y = y
+        }
     }
 }
 
