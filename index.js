@@ -26,6 +26,12 @@ function newConnection(socket){
         // io.sockets.emit('frenemyMoved', state.players)
     })
 
+    socket.on('bulletFired', (bullet) => {
+        console.log(`Bullet fired: ${JSON.stringify(bullet)}`);
+        
+        io.sockets.emit('bulletReceived', bullet)
+    })
+
     socket.emit('connected')
 }
 

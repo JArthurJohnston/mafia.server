@@ -4,6 +4,7 @@ class GameState {
 
     constructor(){
         this.playerMap = {}
+        this.bullets = []
         this.addPlayer = this.addPlayer.bind(this);
         this.movePlayer = this.movePlayer.bind(this);
     }
