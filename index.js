@@ -8,6 +8,12 @@ const io = socket(socketServer)
 
 io.sockets.on('connection', newConnection)
 const state = new GameState()
+const connections = {}
+
+app.get('/players', (request, resposne) => {
+    const players = Object.values(state.playerMap)
+    resposne.send(players)
+})
 
 function newConnection(socket){
     console.log("Connected")
@@ -23,7 +29,7 @@ function newConnection(socket){
     socket.on('playerMoved', (player) =>{
         // console.log(`Player ${JSON.stringify(player)} moved`);
         state.movePlayer(player)
-        sendPositionUpdates()
+        // sendPositionUpdates()
         // io.sockets.emit('frenemyMoved', state.players)
     })
 
@@ -41,12 +47,8 @@ function newConnection(socket){
     socket.emit('connected')
 }
 
-function sendPositionUpdates(){
+setInterval(() => {
     io.sockets.emit('state_of_the_world', state)
-}
-
-// setInterval(() => {
-//     io.sockets.emit('state_of_the_world', state)
-// }, 1000/30);
+}, 1000/30);
 
 console.log('Mafia Server is Running');
