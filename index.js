@@ -39,11 +39,6 @@ function newConnection(socket){
         io.sockets.emit('bulletReceived', bullet)
     })
 
-    socket.on('getAllPlayers', () => {
-        const players = Object.values(state.playerMap)
-        socket.emit('allPlayers', players)
-    })
-
     socket.emit('connected')
 }
 
