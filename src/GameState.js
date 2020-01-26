@@ -7,6 +7,7 @@ class GameState {
         this.bullets = []
         this.addPlayer = this.addPlayer.bind(this);
         this.movePlayer = this.movePlayer.bind(this);
+        this.removePlayer = this.removePlayer.bind(this);
     }
 
     addPlayer(player){
@@ -15,6 +16,11 @@ class GameState {
             const newPlayer = new Player(name, x, y)
             this.playerMap[name] = newPlayer
         }
+    }
+
+    removePlayer(playerName) {
+        if(this.playerMap[playerName])
+            delete(this.playerMap[playerName])
     }
 
     movePlayer({name, x, y}){
