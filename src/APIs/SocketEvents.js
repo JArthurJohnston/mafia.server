@@ -27,6 +27,12 @@ function startSocketAPI(app, state){
             
             io.sockets.emit('bulletReceived', bullet)
         })
+
+        socket.on('playerHit', (player) => {
+            //ignore player movement and input
+
+            io.sockets.emit('playerKilled', player)
+        })
     
         socket.on('disconnect', () => {
             console.log('disconnecting')

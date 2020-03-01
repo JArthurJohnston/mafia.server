@@ -11,9 +11,9 @@ class GameState {
     }
 
     addPlayer(player){
-        const {name, x, y} = player
+        const {name, x, y, state} = player
         if(!this.playerMap[name]){
-            const newPlayer = new Player(name, x, y)
+            const newPlayer = new Player(name, x, y, state)
             this.playerMap[name] = newPlayer
         }
     }

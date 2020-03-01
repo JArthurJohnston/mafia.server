@@ -1,8 +1,9 @@
 class Player {
-    constructor(name, x, y){
+    constructor(name, x, y, state){
         this.name = name
         this.x = x
         this.y = y
+        this.state = state
     }
 
     toString() {
